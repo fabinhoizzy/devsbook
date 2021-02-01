@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>Devsbook</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1"/>
     <link rel="stylesheet" href="<?=$base;?>/assets/css/style.css" />
 </head>
@@ -24,7 +24,7 @@
                     <a href="<?=$base;?>/perfil" class="user-area">
                         <div class="user-area-text"><?=$loggedUser->name;?></div>
                         <div class="user-area-icon">
-                            <img src="<?=$base;?>/media/avatars/<?=$loggedUser->avatar?>" />
+                            <img src="<?=$base;?>/media/avatars/<?=$loggedUser->avatar;?>" />
                         </div>
                     </a>
                     <a href="<?=$base;?>/sair" class="user-logout">

@@ -40,7 +40,7 @@ class PostHandler{
             ->where('id_user', 'in', $users)
             ->orderBy('created_at','desc')
             ->page($page, $perPage)
-            ->get();
+        ->get();
 
         $total = Post::select()
             ->where('id_user', 'in', $users)
@@ -48,7 +48,7 @@ class PostHandler{
         $pageCount = ceil($total / $perPage);
 
         //3. transformaro resultado em objetos dos models
-        $post = [];
+        $posts = [];
         foreach ($postList as $postItem) {
             $newPost = new Post();
             $newPost->id = $postItem['id'];
@@ -86,6 +86,27 @@ class PostHandler{
             'pageCount' => $pageCount,
             'currentPage' =>$page
         ];
+    }
+
+    public function getPhotosFrom($idUser) {
+        $photosData = Post::select()
+            ->where('id_user', $idUser)
+            ->where('type', 'photo')
+         ->get(); 
+         
+         $photos = [];
+
+         foreach($photosData as $photo) {
+            $newPost = new Post();
+            $newPost->id = $photo['id'];
+            $newPost->type = $photo['type'];
+            $newPost->create_at = $photo['created_at'];
+            $newPost->body = $photo['body']; 
+
+            $photos[] = $newPost;
+         }
+
+         return $photos;
     }
 
 }
