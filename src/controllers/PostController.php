@@ -3,7 +3,7 @@ namespace src\controllers;
 
 use \core\Controller;
 use \src\handlers\UserHandler;
-use src\handlers\PostHandler;
+use \src\handlers\PostHandler;
 
 class PostController extends Controller {
 
@@ -28,7 +28,19 @@ class PostController extends Controller {
         }
 
         $this->redirect('/');
+    }
 
+    public function delete($atts = []) {
+        if(!empty($atts['id'])) {
+            $idPost = $atts['id'];
+
+            PostHandler::delete(
+                $idPost,
+                $this->loggedUser->id
+            );
+        }
+
+        $this->redirect('/');
     }
 
 }

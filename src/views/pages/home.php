@@ -1,50 +1,34 @@
-<?= $render('header', ['loggedUser' => $loggedUser]); ?>
+<?=$render('header', ['loggedUser'=>$loggedUser]);?>
 
-    <section class="container main">
-        <?= $render('sidebar', ['activeMenu' => 'home']); ?>
+<section class="container main">
+    <?=$render('sidebar', ['activeMenu'=>'home']);?>
 
-        <section class="feed mt-10">
+    <section class="feed mt-10">
+        
+        <div class="row">
+            <div class="column pr-5">
 
-            <div class="row">
-                <div class="column pr-5">
+                <?=$render('feed-editor', ['user'=>$loggedUser]);?>
 
-                <?=$render('feed-editor', ['user'=>$loggedUser]); ?>
-
-                <?php foreach ($feed['posts'] as $feedItem): ?>
+                <?php foreach($feed['posts'] as $feedItem): ?>
                     <?=$render('feed-item', [
-                            'data' => $feedItem,
-                            'loggedUser' => $loggedUser
+                        'data' => $feedItem,
+                        'loggedUser' => $loggedUser
                     ]);?>
                 <?php endforeach; ?>
-
+                    
                 <div class="feed-pagination">
                     <?php for($q=0;$q<$feed['pageCount'];$q++): ?>
                         <a class="<?=($q==$feed['currentPage']?'active':'')?>" href="<?=$base;?>/?page=<?=$q;?>"><?=$q+1;?></a>
                     <?php endfor; ?>
                 </div>
 
-                </div>
-                <div class="column side pl-5">
-                    <div class="box banners">
-                        <div class="box-header">
-                            <div class="box-header-text">Patrocinios</div>
-                            <div class="box-header-buttons">
-
-                            </div>
-                        </div>
-                        <div class="box-body">
-                            <a href=""><img src="<?=$base;?>/assets/images/php.png"/></a>
-                            <a href=""><img src="<?=$base;?>/assets/images/laravel.png"/></a>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <div class="box-body m-10">
-                            Criado por Fábio Silva
-                        </div>
-                    </div>
-                </div>
             </div>
+            <div class="column side pl-5">
+                <?=$render('right-side');?>
+            </div>
+        </div>
 
-        </section>
     </section>
-<?= $render('footer'); ?>
+</section>
+<?=$render('footer');?>
